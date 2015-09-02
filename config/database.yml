@@ -1,0 +1,19 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: network_scanner_development
+  host: localhost
+  username: postgres
+  password: pitchme
+  pool: 5
+  timeout: 5432
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: network_scanner_production
+  host: localhost
+  username: pitchme
+  password: pitchme
+  pool: 5
+  timeout: 5432
