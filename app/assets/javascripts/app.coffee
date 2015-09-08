@@ -14,14 +14,24 @@ network_scanner.config([ '$routeProvider',
 ])
 
 controllers = angular.module('controllers',[])
-controllers.controller("RecipesController", [ '$scope',
-  ($scope)->
-    console.log("coucou")
+controllers.controller("RecipesController", [ '$scope', '$http',
+  ($scope, $http)->
 
     $scope.search = (ip) ->
       console.log ("ip : " +ip.value)
       ValidateIPaddress(ip.value)
-      return
+
+      http =
+        method: "GET",
+        url: "/api/search",
+        params: ip_address: ip.value
+
+      $http(http)
+        .success (response) ->
+          console.log(response)
+
+        .error (jqXHR, textStatus, errorThrown) ->
+          console.log("AJAX Error: "+textStatus)
 
 ])
 
