@@ -28,15 +28,16 @@ controllers.controller("RecipesController", [ '$scope', '$http',
 
       $http(http)
         .success (response) ->
-          console.log(response)
+          console.log(response.length)
+          console.log(typeof response)
+          $scope.results = response
 
         .error (jqXHR, textStatus, errorThrown) ->
           console.log("AJAX Error: "+textStatus)
-
 ])
 
 ValidateIPaddress = (ipaddress) ->
-  if /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)
+  if /^(192\.168\.([0,1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.([0,1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))$/.test(ipaddress)
     return true
   alert 'You have entered an invalid IP address!'
   false

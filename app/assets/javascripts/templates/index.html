@@ -1,8 +1,8 @@
 <header class="row">
   <h1 class="text-center col-md-6 col-md-offset-3">Network Scanner</h1>
 </header>
-<section class="row">
-  <div ng-controller="RecipesController">
+<div ng-controller="RecipesController">
+  <section class="row">
     <form>
       <h2 class="text-center">IP to scan</h2>
       <div class="form-group col-md-6 col-md-offset-3">
@@ -13,9 +13,19 @@
         <input class="btn btn-primary btn-lg" type="submit" ng-click="search(ip)" value="Search" />
       </div>
     </form>
-  </div>
-</section>
-<hr>
-<section class="row">
-  <h1 class="text-center h2">Results</h1
-</section>
+  </section>
+  <hr>
+  <section class="row">
+    <h1 class="text-center h2">Results</h1>
+    <div ng-repeat="result in results">
+      <p class="text-center">
+        {{result.port}}
+      </p>
+    </div>
+    <div class="">
+      <p class="text-center">
+        {{results.port}}
+      </p>
+    </div>
+  </section>
+</div>
