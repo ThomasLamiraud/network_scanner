@@ -17,14 +17,22 @@
   <hr>
   <section class="row">
     <h1 class="text-center h2">Results</h1>
-    <div ng-repeat="result in results">
-      <p class="text-center">
-        {{result.port}}
-      </p>
-    </div>
+      <table class="table table-striped col-md-6">
+        <tr>
+          <td>Port</td>
+          <td>Service</td>
+          <td>Status</td>
+        </tr>
+        <tr ng-repeat="result in results">
+          <td>{{result.port}}</td>
+          <td>{{result.service}}</td>
+          <td>{{result.status}}</td>
+        </tr>
+      </table>
+
     <div class="">
       <p class="text-center">
-        {{results.port}}
+        {{results.status}}
       </p>
     </div>
   </section>

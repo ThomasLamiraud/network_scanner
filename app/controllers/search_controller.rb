@@ -18,14 +18,15 @@ class SearchController < ApplicationController
           ports = result.split(/\n/)
 
           json_port = ports.map do |p|
-            { :port => p }
+
+            { :port => p.scan(/\w{4} \d{2,}/), :service => p.scan(/\/[a-z]+/).first.tr('/', ''), :status => "Open"}
           end
 
         else
-          json_port = { :port => "Host unreachable" }
+          json_port = { :status => "Host unreachable" }
         end
       else
-        json_port = { :port => "IP Incorrecte" }
+        json_port = { :status => "IP Incorrecte" }
       end
 
       respond_with json_port.to_json
