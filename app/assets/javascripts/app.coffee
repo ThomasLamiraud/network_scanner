@@ -28,8 +28,6 @@ controllers.controller("RecipesController", [ '$scope', '$http',
 
       $http(http)
         .success (response) ->
-          console.log(response.length)
-          console.log(typeof response)
           $scope.results = response
 
         .error (jqXHR, textStatus, errorThrown) ->
