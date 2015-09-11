@@ -25,13 +25,13 @@ class SearchController < ApplicationController
 
       if params[:ip_address].match re
         tab_port = []
-        # puts "Correct IP"
+        puts "Correct IP"
 
         # OLD CODE
           # adress = IPAddr.new params[:ip_address]
           adress = params[:ip_address]
         if ping(adress)
-          # puts "Scanning ..."
+          puts "Scanning ..."
           # result = `nc -z #{adress} 1-1023`
 
           # puts "Result : #{result}"
@@ -42,7 +42,7 @@ class SearchController < ApplicationController
 
           # OLD CODE
             # ports = result.split(/\n/)
-
+          puts tab_port
           json_port = tab_port.map do |p|
 
             { :port => p.first["port"], :service => p.first["service"], :status => "Open"}
@@ -86,7 +86,12 @@ class SearchController < ApplicationController
     raw = Socket.sockaddr_in(port, host)
     # puts "#{port} open." if sock.connect(raw)
     if sock.connect(raw)
-      tab_port.push(H_ports.select{|port_number, service| port_number["port"] == port.to_s })
+      # Check if port is known in the hash
+      if H_ports.any? {|h| h["port"] == port.to_s}
+        tab_port.push(H_ports.select{|port_number, service| port_number["port"] == port.to_s })
+      else
+        tab_port.push([{"port" => port.to_s, "service" => "random service"}])
+      end
     end
 
   rescue (Errno::ECONNREFUSED)
