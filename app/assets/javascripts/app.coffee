@@ -2,6 +2,7 @@ network_scanner = angular.module('network_scanner',[
   'templates',
   'ngRoute',
   'controllers',
+  'ngProgress'
 ])
 
 network_scanner.config([ '$routeProvider',
@@ -14,10 +15,15 @@ network_scanner.config([ '$routeProvider',
 ])
 
 controllers = angular.module('controllers',[])
-controllers.controller("RecipesController", [ '$scope', '$http',
-  ($scope, $http)->
+controllers.controller("RecipesController", [ '$scope', '$http', 'ngProgressFactory'
+  ($scope, $http, ngProgressFactory)->
+
 
     $scope.search = (ip) ->
+
+      $scope.progressbar = ngProgressFactory.createInstance()
+      $scope.progressbar.start()
+
       console.log ("ip : " +ip.value)
       ValidateIPaddress(ip.value)
 
@@ -29,6 +35,7 @@ controllers.controller("RecipesController", [ '$scope', '$http',
       $http(http)
         .success (response) ->
           $scope.results = response
+          $scope.progressbar.complete()
 
         .error (jqXHR, textStatus, errorThrown) ->
           console.log("AJAX Error: "+textStatus)
