@@ -5,10 +5,13 @@ Write down an ip adress (like 192.168.X.X) to check open port on this specific i
 This app only on works on local network for now.
 
 Test on Mac OS X 10.10.5
+Test on Raspberry Pi Model B 512 Mo Raspbian
 
 Things you may want to cover:
 
 * Ruby version
+  - 2.2.1
+* Rails version
   - 4.1.9
 * Angular version
   - 1.4.5
